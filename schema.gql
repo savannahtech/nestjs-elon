@@ -1,0 +1,227 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SupplierContactRole {
+  _id: String
+  role: String
+}
+
+type SupplierContact {
+  _id: String
+  name: String
+  email: String
+  role: [SupplierContactRole!]
+  phone: String
+}
+
+type Supplier {
+  id: String
+  name: String
+  email: String
+  address: String
+  vatNumber: String
+  contacts: [SupplierContact!]
+  billboardTypes: [String!]
+}
+
+type BillboardType {
+  id: String
+  name: String
+}
+
+type City {
+  id: String
+  name: String
+  population: Float
+  men: Float
+  women: Float
+  area: String
+  socio_economy: String
+  license_holders: [String!]
+}
+
+type Address {
+  latitude: Float
+  longitude: Float
+  formattedAddress: String
+  neighborhood: String
+}
+
+type File {
+  _id: String
+  fieldname: String
+  originalname: String
+  encoding: String
+  mimetype: String
+  destination: String
+  filename: String
+  path: String
+  size: Float
+}
+
+type Billboard {
+  id: String
+  address: Address
+  billboardNumber: Float
+  type: BillboardType
+  totalSize: Float
+  supplier: Supplier
+  city: City
+  width: Float
+  height: Float
+  subType: String
+  side: String
+  premiumDescription: String
+  orientation: String
+  isActive: Boolean
+  price: Float
+  views: Float
+  rotation: Float
+  images: [File!]
+}
+
+type SystemRole {
+  id: String
+  role: String
+}
+
+type User {
+  username: String!
+  email: String!
+  phone: String
+  password: String!
+  roles: [SystemRole!]
+}
+
+type LoginResponse {
+  token: String!
+}
+
+input SupplierContactRoleInput {
+  _id: String
+  role: String
+}
+
+input SupplierContactInput {
+  _id: String
+  name: String
+  email: String
+  role: [SupplierContactRoleInput!]
+  phone: String
+}
+
+input SupplierInput {
+  id: String
+  name: String
+  email: String
+  address: String
+  vatNumber: String
+  contacts: [SupplierContactInput!]
+  billboardTypes: [String!]
+}
+
+input BillboardTypeInput {
+  id: String
+  name: String
+}
+
+input CityInput {
+  id: String
+  name: String
+  population: Float
+  men: Float
+  women: Float
+  area: String
+  socio_economy: String
+  license_holders: [String!]
+}
+
+input AddressInput {
+  latitude: Float
+  longitude: Float
+  formattedAddress: String
+  neighborhood: String
+}
+
+input FileInput {
+  _id: String
+  fieldname: String
+  originalname: String
+  encoding: String
+  mimetype: String
+  destination: String
+  filename: String
+  path: String
+  size: Float
+}
+
+input SystemRoleInput {
+  id: String
+  role: String
+}
+
+type Query {
+  getSuppliers: [Supplier!]!
+  getSupplierById(id: String!): Supplier!
+  getSupplierContactRoles: [SupplierContactRole!]!
+  getSupplierContacts(supplierId: String!): [SupplierContact!]!
+  getBillboards: [Billboard!]!
+  getBillboardTypes: [BillboardType!]!
+  getBillboardType(id: String!): BillboardType!
+  getCities: [City!]!
+  getUsers: [User!]!
+}
+
+type Mutation {
+  createSupplier(supplier: SupplierInput!): Supplier!
+  updateSupplier(supplier: SupplierInput!): Supplier!
+  deleteSupplier(id: String!): Supplier!
+  createSupplierContactRole(supplierContactRole: SupplierContactRoleInput!): SupplierContactRole!
+  updateSupplierContactRole(supplierContactRole: SupplierContactRoleInput!): SupplierContactRole!
+  deleteSupplierContactRole(id: String!): SupplierContactRole!
+  createSupplierContact(supplierContact: SupplierContactInput!, supplierId: String!, supplierContactRoleIds: [String!]!): SupplierContact!
+  updateSupplierContact(supplierContact: SupplierContactInput!): SupplierContact!
+  deleteSupplierContact(id: String!): SupplierContact!
+  createBillboard(billboard: BillboardInput!): Billboard!
+  updateBillboard(billboard: BillboardInput!): Billboard!
+  deleteBillboard(id: String!): Billboard!
+  createBillboardType(billboardType: BillboardTypeInput!): BillboardType!
+  updateBillboardType(billboardType: BillboardTypeInput!): BillboardType!
+  deleteBillboardType(id: String!): BillboardType!
+  createCity(city: CityInput!): City!
+  updateCity(city: CityInput!): City!
+  deleteCity(id: String!): City!
+  createUser(user: UserInput!): User!
+  createRole(role: SystemRoleInput!): SystemRole!
+  login(username: String!, password: String!): LoginResponse!
+}
+
+input BillboardInput {
+  id: String
+  address: AddressInput
+  billboardNumber: Float
+  type: String
+  totalSize: Float
+  supplier: String
+  city: String
+  width: Float
+  height: Float
+  subType: String
+  side: String
+  premiumDescription: String
+  orientation: String
+  isActive: Boolean
+  price: Float
+  views: Float
+  rotation: Float
+  images: [FileInput!]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  phone: String
+  password: String!
+  roles: [String!]
+}
